@@ -34,7 +34,6 @@ pipeline {
                 script{
                     dir('online-coding-master') {
                         sh "echo run testcase"
-                        //sh "echo $test_data>>test_data"
                         sh "../run-testcase.sh"
                     }
                   }
@@ -45,10 +44,12 @@ pipeline {
     post {
         failure{
             sh "echo failure"
+            sh "./failure.sh"
             sh "./cleanup.sh"
         }
         success{
             sh "echo success"
+            sh "./success.sh"
             sh "./cleanup.sh"
         }
     }
