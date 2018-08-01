@@ -45,11 +45,11 @@ pipeline {
     post {
         failure{
             sh "echo failure"
-            //sh "./success.sh"
+            sh "../cleanup.sh"
         }
         success{
             sh "echo success"
-            //sh "./success.sh"
+            sh "../cleanup.sh"
         }
     }
 }
