@@ -13,9 +13,9 @@
       echo "期望: $EXCEPT"
       echo "实际: $ACTUAL"
       if [[ $ACTUAL == $EXPORT ]]; then
-          let "$SUCCESS_COUNT+=1"
+          let "SUCCESS_COUNT+=1"
       else
-          let "$SUCCESS_COUNT+=2"
+          let "SUCCESS_COUNT+=2"
         fi
     done
     echo "SUCCESS_COUNT:$SUCCESS_COUNT"
