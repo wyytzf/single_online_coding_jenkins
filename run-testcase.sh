@@ -7,6 +7,7 @@ for k in $( seq 1 $COUNT );
 do
   idx=`expr $k - 1`
   echo "times:$idx"
+  echo "k:$k"
   PARAM=$(cat test_data.json| jq -r ".[$idx].input")
   ACTUAL=$(sudo docker exec -i javadocker sh -c "cd /var/test_directory && java demo $PARAM")
   EXCEPT=$(cat test_data.json| jq -r ".[$idx].expectedOutput")
