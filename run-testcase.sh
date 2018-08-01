@@ -1,13 +1,13 @@
 #!/bin/sh
 echo $test_data > test_data.json
 
-COUNT=$(cat test_data.json| jq -r ".test | length")
+COUNT=$(cat test_data.json| jq -r ".[] | length")
 
 for k in $( seq 1 $COUNT ); do
   idx=`expr $k - 1`
-  PARAM=$(cat test_data.json| jq -r ".test[$idx].in")
+  PARAM=$(cat test_data.json| jq -r ".[$idx].input")
   ACTUAL=$(sudo docker exec -it javadocker sh -c "cd /var/test_directory && java demo $PARAM")
-  EXCEPT=$(cat test_data.json| jq -r ".test[$idx].out")
+  EXCEPT=$(cat test_data.json| jq -r ".[$idx].expectedOutput")
 
   echo "期望: $EXCEPT"
   echo "实际: $ACTUAL"
