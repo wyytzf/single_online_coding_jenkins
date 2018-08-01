@@ -2,6 +2,7 @@
 echo $test_data > test_data.json
 
 COUNT=$(cat test_data.json| jq -r ".[] | length")
+COUNT=`expr $COUNT + 1`
 for k in $( seq 1 $COUNT );
 do
   idx=`expr $k - 1`
