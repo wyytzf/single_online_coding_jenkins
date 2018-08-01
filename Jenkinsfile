@@ -35,7 +35,7 @@ pipeline {
                     dir('online-coding-master') {
                         sh "echo run testcase"
                         sh "echo $test_data"
-                        sh "../run-testcase.sh"
+                        //sh "../run-testcase.sh"
                     }
                   }
             }
