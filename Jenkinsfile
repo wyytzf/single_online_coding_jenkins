@@ -34,8 +34,8 @@ pipeline {
                 script{
                     dir('online-coding-master') {
                         sh "echo run testcase"
-                        sh "echo $test_data>>test_data"
-                        //sh "../run-testcase.sh"
+                        //sh "echo $test_data>>test_data"
+                        sh "../run-testcase.sh"
                     }
                   }
             }
