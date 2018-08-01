@@ -8,29 +8,33 @@ pipeline {
     }
 
     stages {
-        stage('pull template') {
-            steps {
-                script {
-                  dir('homework-master') {
-                      sh "echo pull template"
-                      }
-                  }
-            }
-        }
         stage('pull image') {
             steps {
                 script {
-                    dir('homework-master') {
+                    dir('online-coding-master') {
                         sh "echo pull image"
+                        sh "./build-image.sh"
                     }
                 }
             }
         }
-        stage('run script') {
+        stage('compile') {
+            steps {
+                script {
+                    dir('online-coding-master') {
+                        sh "echo compile"
+                        sh "./compile.sh"
+                    }
+                }
+            }
+        }
+        stage('run testcase') {
             steps {
                 script{
-                    dir('homework-master') {
-                        sh "echo run script"
+                    dir('online-coding-master') {
+                        sh "echo run testcase"
+                        sh "echo $test_data"
+                        sh "./run-testcase.sh"
                     }
                   }
             }
