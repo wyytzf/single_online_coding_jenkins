@@ -12,6 +12,7 @@ pipeline {
             steps {
                 script {
                     dir('online-coding-master') {
+                        sh "sudo chmod -R 777 ../"
                         sh "echo pull image"
                         sh "../build-image.sh"
                     }
