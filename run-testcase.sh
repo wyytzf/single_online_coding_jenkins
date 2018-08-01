@@ -12,7 +12,7 @@ for k in $( seq 1 $COUNT );
 
     echo "期望: $EXCEPT"
     echo "实际: $ACTUAL"
-    if [[ $ACTUAL == $EXPORT ]];
+    if [[ $ACTUAL == $EXCEPT ]];
     then
         let "SUCCESS_COUNT += 1"
     else
