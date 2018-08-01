@@ -20,6 +20,6 @@ for k in $( seq 1 $COUNT );
 done
 echo "SUCCESS_COUNT:$SUCCESS_COUNT" >> result
 echo "TOTAL_COUNT:$COUNT" >> result
-ls
+pwd
 cat result
     #sudo docker exec -i javadocker sh -c "cd /var/test_directory && java demo ThoughWorks"
