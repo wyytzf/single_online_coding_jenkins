@@ -13,7 +13,7 @@ pipeline {
                 script {
                     dir('online-coding-master') {
                         sh "echo pull image"
-                        sh "./build-image.sh"
+                        sh "../build-image.sh"
                     }
                 }
             }
@@ -23,7 +23,7 @@ pipeline {
                 script {
                     dir('online-coding-master') {
                         sh "echo compile"
-                        sh "./compile.sh"
+                        sh "../compile.sh"
                     }
                 }
             }
@@ -34,7 +34,7 @@ pipeline {
                     dir('online-coding-master') {
                         sh "echo run testcase"
                         sh "echo $test_data"
-                        sh "./run-testcase.sh"
+                        sh "../run-testcase.sh"
                     }
                   }
             }
