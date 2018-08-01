@@ -11,15 +11,14 @@ for k in $( seq 1 $COUNT );
     EXCEPT=$(cat test_data.json| jq -r ".[$idx].expectedOutput")
 
     echo "期望: $EXCEPT" >> result
-    echo "\n" >> result
-    echo "实际: $ACTUAL\n" >> result
+    echo "实际: $ACTUAL" >> result
     if [[ "$ACTUAL" == "$EXCEPT" ]];
     then
         let "SUCCESS_COUNT += 1"
     fi
 
 done
-echo "SUCCESS_COUNT:$SUCCESS_COUNT\n" >> result
+echo "SUCCESS_COUNT:$SUCCESS_COUNT" >> result
 echo "TOTAL_COUNT:$COUNT" >> result
-cat result
+#cat result
     #sudo docker exec -i javadocker sh -c "cd /var/test_directory && java demo ThoughWorks"
