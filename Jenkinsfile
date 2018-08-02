@@ -31,7 +31,7 @@ pipeline {
 
                               sh "../time_limit.sh compile.sh & 1>/dev/stdout 2>/dev/stderr"
 
-                              sh "../check_compile_error.sh & 1>/dev/stdout 2>/dev/stderr"
+                              sh "../check_compile_error.sh 1>/dev/stdout 2>/dev/stderr"
                             }
                           
                         } catch (e) {
