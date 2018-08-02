@@ -26,11 +26,14 @@ pipeline {
                         try {
                           sh "echo compile"
                           // 后台运行编译脚本
-                          sh "../compile.sh & 1>/dev/stdout 2>/dev/stderr"
-                        
-                          sh "../time_limit.sh compile.sh & 1>/dev/stdout 2>/dev/stderr"
+                            timeout(time:5, unit:'SECONDS'){
+                              sh "../compile.sh & 1>/dev/stdout 2>/dev/stderr"
+
+                              sh "../time_limit.sh compile.sh & 1>/dev/stdout 2>/dev/stderr"
+
+                              sh "../check_compile_error.sh & 1>/dev/stdout 2>/dev/stderr"
+                            }
                           
-                          sh "../check_compile_error.sh & 1>/dev/stdout 2>/dev/stderr"
                         } catch (e) {
                           sh "echo '编译超时'" > result
                         }
