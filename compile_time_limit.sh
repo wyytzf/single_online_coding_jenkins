@@ -5,7 +5,7 @@ while [ $seconds_left -gt 0 ];do
   seconds_left=$(($seconds_left - 1))
   if [ -f "result-compile" ];
   then
-    exit -1
+    exit 1
   fi
 done
 # 查看进程 compile.sh是否存在，若存在，则超时
