@@ -6,7 +6,7 @@ while [ $seconds_left -gt 0 ];do
   if [ -f "result-compile" ];
   then
     exit -1
-  if
+  fi
 done
 # 查看进程 compile.sh是否存在，若存在，则超时
 pidarr=$(ps ef|grep "run_background.sh"|awk '{print $1}')
