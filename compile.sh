@@ -7,7 +7,7 @@ STARTTIME=`date +%s%N`
 sudo docker exec -i javadocker sh -c "cd /var/test_directory && javac -verbose demo.java" 1>compile-success 2>compile-error
 ENDTIME=`date +%s%N`
 MSG=$(cat compile-error)
-echo $MSG
+echo "MSG::::$MSG"
 if [ -z "$MSG" ];then
   exit 1
 fi
