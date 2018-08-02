@@ -24,9 +24,10 @@ pipeline {
                 script {
                     dir('online-coding-master') {
                         sh "echo compile"
+                        // 后台运行编译脚本
                         sh "../compile.sh &"
-                        // 运行时间检测脚本，超时则kill进程
-                        sh "../compile_time_limit.sh"
+                        // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
+                        sh "../time_limit.sh compile.sh"
                     }
                 }
             }
@@ -37,6 +38,8 @@ pipeline {
                     dir('online-coding-master') {
                         sh "echo run testcase"
                         sh "../run-testcase.sh"
+                        // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
+                        sh "../time_limit.sh run-testcase.sh"
                     }
                   }
             }
