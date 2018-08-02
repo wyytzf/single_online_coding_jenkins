@@ -5,7 +5,7 @@ while [ $seconds_left -gt 0 ];do
   seconds_left=$(($seconds_left - 1))
   count=`ps -ef | grep $1 | grep -v $0 | wc -l`
   echo $(ps -ef | grep $1 | grep -v $0)
-  if [ "$(ps ef|grep $1)" == "" ];
+  if [ $count -ne 2 ];
   then
     echo "成功"
     exit 0
