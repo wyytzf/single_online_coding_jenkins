@@ -5,6 +5,7 @@ while [ $seconds_left -gt 0 ];do
   seconds_left=$(($seconds_left - 1))
   if [ "$(ps ef|grep '$1')" == "" ];
   then
+    echo "成功"
     exit 0
   fi
 done
