@@ -19,7 +19,7 @@ for k in $( seq 1 $COUNT );
     fi
 done
 ENDTIME=`date +%s%N`
-COSTTIME =`expr $ENDTIME - $STARTTIME`
+COSTTIME=`expr $ENDTIME - $STARTTIME`
 echo "SUCCESS_COUNT:$SUCCESS_COUNT" >> result
 echo "TOTAL_COUNT:$COUNT" >> result
 echo "运行时间:$COSTTIME" >> result
