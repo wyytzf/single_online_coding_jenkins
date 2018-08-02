@@ -4,7 +4,7 @@ echo $user_answer_code > demo.java
 sudo docker exec -i javadocker sh -c "mkdir /var/test_directory/"
 sudo docker cp demo.java javadocker:/var/test_directory/demo.java
 STARTTIME=`date +%s%N`
-echo sudo docker exec -i javadocker sh -c "cd /var/test_directory && javac demo.java"
+echo sudo docker exec -i javadocker sh -c "cd /var/test_directory && javac demo.java > result-compile"
 ENDTIME=`date +%s%N`
 COSTTIME =`expr $ENDTIME - $STARTTIME`
 echo "编译时间:$COSTTIME" >> result
