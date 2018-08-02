@@ -44,13 +44,13 @@ pipeline {
     post {
         failure{
             sh "echo failure"
-            sh "./failure.sh"
-            sh "./cleanup.sh"
+            //sh "./failure.sh"
+            //sh "./cleanup.sh"
         }
         success{
             sh "echo success"
-            sh "./success.sh"
-            sh "./cleanup.sh"
+            //sh "./success.sh"
+            //sh "./cleanup.sh"
         }
     }
 }
