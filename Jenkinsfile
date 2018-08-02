@@ -24,7 +24,9 @@ pipeline {
                 script {
                     dir('online-coding-master') {
                         sh "echo compile"
-                        sh "../compile.sh"
+                        sh "../compile.sh &"
+                        // 运行时间检测脚本，超时则kill进程
+                        sh "set -e"
                     }
                 }
             }
@@ -44,13 +46,13 @@ pipeline {
     post {
         failure{
             sh "echo failure"
-            //sh "./failure.sh"
-            //sh "./cleanup.sh"
+            sh "./failure.sh"
+            sh "./cleanup.sh"
         }
         success{
             sh "echo success"
-            //sh "./success.sh"
-            //sh "./cleanup.sh"
+            sh "./success.sh"
+            sh "./cleanup.sh"
         }
     }
 }
