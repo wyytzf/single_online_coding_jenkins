@@ -4,7 +4,7 @@ while [ $seconds_left -gt 0 ];do
   sleep 1
   seconds_left=$(($seconds_left - 1))
   count=`ps -ef | grep $1 | grep -v $0 | wc -l`
-  echo $count
+  echo $(ps -ef | grep $1 | grep -v $0)
   if [ "$(ps ef|grep $1)" == "" ];
   then
     echo "成功"
