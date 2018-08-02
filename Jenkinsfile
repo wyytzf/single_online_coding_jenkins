@@ -26,11 +26,11 @@ pipeline {
                         try {
                           sh "echo compile"
                           // 后台运行编译脚本
-                          sh "../compile.sh & >1 >2"
-                          // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
-                          sh "../time_limit.sh compile.sh & >1 >2"
-                           // 运行编译错误检查脚本
-                          sh "../check_compile_error.sh & >1 >2"
+                          sh "../compile.sh & 1>/dev/stdout 2>/dev/stderr"
+                        
+                          sh "../time_limit.sh compile.sh & 1>/dev/stdout 2>/dev/stderr"
+                          
+                          sh "../check_compile_error.sh & 1>/dev/stdout 2>/dev/stderr"
                         } catch (e) {
                           sh "echo '编译超时'" > result
                         }
@@ -45,7 +45,7 @@ pipeline {
                         try {
                             sh "echo run testcase"
                             sh "../run-testcase.sh &"
-                            // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
+                           
                             //sh "../time_limit.sh run-testcase.sh"
                         } catch (e) {
                             sh "echo '运行超时'" > result
