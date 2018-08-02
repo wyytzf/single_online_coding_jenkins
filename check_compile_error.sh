@@ -1,6 +1,6 @@
-!#/bin/sh
+#!/bin/sh
 echo "check compile error"
-exit 1
+exit 0
 #MSG=$(cat compile-error)
 #echo $MSG
 #if [ -z "$MSG" ];then
