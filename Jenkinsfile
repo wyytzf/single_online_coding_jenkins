@@ -23,11 +23,15 @@ pipeline {
             steps {
                 script {
                     dir('online-coding-master') {
-                        sh "echo compile"
-                        // 后台运行编译脚本
-                        sh "../compile.sh &"
-                        // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
-                        sh "../time_limit.sh compile.sh"
+                        try {
+                          sh "echo compile"
+                          // 后台运行编译脚本
+                          sh "../compile.sh &"
+                          // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
+                          sh "../time_limit.sh compile.sh"
+                        } catch (e) {
+                          sh "echo '编译超时'" > result
+                        }
                     }
                 }
             }
@@ -36,10 +40,14 @@ pipeline {
             steps {
                 script{
                     dir('online-coding-master') {
-                        sh "echo run testcase"
-                        sh "../run-testcase.sh"
-                        // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
-                        sh "../time_limit.sh run-testcase.sh"
+                        try {
+                            sh "echo run testcase"
+                            sh "../run-testcase.sh &"
+                            // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
+                            sh "../time_limit.sh run-testcase.sh"
+                        } catch (e) {
+                            sh "echo '运行超时'" > result
+                        }
                     }
                   }
             }
