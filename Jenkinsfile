@@ -26,7 +26,7 @@ pipeline {
                         sh "echo compile"
                         sh "../compile.sh &"
                         // 运行时间检测脚本，超时则kill进程
-                        sh "set -e"
+                        sh "../compile_time_limit.sh"
                     }
                 }
             }

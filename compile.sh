@@ -8,4 +8,3 @@ sudo docker exec -i javadocker sh -c "cd /var/test_directory && javac -verbose d
 ENDTIME=`date +%s%N`
 COSTTIME=`expr $ENDTIME - $STARTTIME`
 echo "编译时间:$COSTTIME" >> result
-echo "错误测试" > &2
