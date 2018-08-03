@@ -30,11 +30,17 @@ pipeline {
                           timeout(time:20,unit:'SECONDS'){
                             sh "../compile.sh"
                           }
+                        } catch (e) {
+                            env.LOCAL_ERROR = '编译超时(20s)'
+                            error(env.LOCAL_ERROR)
+                        }
+                        try {
                           sh "../check_compile_error.sh"
                         } catch (e) {
-                          env.LOCAL_ERROR = '编译超时(20s)'
+                          env.LOCAL_ERROR = '编译错误'
                           error(env.LOCAL_ERROR)
                         }
+
                     }
                 }
             }
