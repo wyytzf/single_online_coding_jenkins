@@ -9,7 +9,9 @@ pipeline {
         string(name: 'status',defaultValue:'0')
         // 0-默认值；1-编译超时；2-编译错误；3-运行超时；4-运行错误；5-成功
     }
-
+    environment { 
+        CC = 'clang'
+    }
     stages {
         stage('pull image') {
             steps {
