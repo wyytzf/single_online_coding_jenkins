@@ -1,5 +1,5 @@
 #!/bin/sh
-job_msg=$(cat /online-coding-master/result)
+job_msg=$(cat online-coding-master/result)
 curl -X POST \
     -F "status=4" \
     -F "msg=success" \
