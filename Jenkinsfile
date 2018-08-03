@@ -26,13 +26,10 @@ pipeline {
                         try {
 
                           sh "echo compile"
-                          // 后台运行编译脚本
+                          // 后台运行编译脚本,并设置timeout为20s
                           timeout(time:20,unit:'SECONDS'){
                             sh "../compile.sh"
                           }
-                          // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
-                          //sh "../time_limit.sh compile.sh &"
-                          // 运行编译错误检查脚本
                           sh "../check_compile_error.sh"
                         } catch (e) {
                           sh "echo '编译超时'" > result
@@ -47,9 +44,11 @@ pipeline {
                     dir('online-coding-master') {
                         try {
                             sh "echo run testcase"
-                            sh "../run-testcase.sh &"
+                            timeout(time:20,unit:'SECONDS'){
+                              sh "../run-testcase.sh"
+                            }
                             // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
-                            sh "../time_limit.sh run-testcase.sh"
+                            // sh "../time_limit.sh run-testcase.sh"
                         } catch (e) {
                             sh "echo '运行超时'" > result
                         }
@@ -63,12 +62,12 @@ pipeline {
         failure{
             sh "echo failure"
             sh "./failure.sh"
-            //sh "./cleanup.sh"
+            sh "./cleanup.sh"
         }
         success{
             sh "echo success"
             sh "./success.sh"
-            //sh "./cleanup.sh"
+            sh "./cleanup.sh"
         }
     }
 }
