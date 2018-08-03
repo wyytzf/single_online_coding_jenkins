@@ -6,11 +6,10 @@ pipeline {
         string(name: 'callback_url')
         string(name: 'image')
         string(name: 'RUNTESTCASE_ERROR',defaultValue:'FALSE')
-        
-        // 0-默认值；1-编译超时；2-编译错误；3-运行超时；4-运行错误；5-成功
+
     }
-    environment { 
-        CC = 'clang'
+    environment {
+            STATUS = '0'
     }
     stages {
         stage('pull image') {
@@ -36,14 +35,14 @@ pipeline {
                             sh "../compile.sh"
                           }
                         } catch (e) {
-                            
+                            env.STATUS = '1'
                             env.LOCAL_ERROR = '编译超时(20s)'
                             error(env.LOCAL_ERROR)
                         }
                         try {
                           sh "../check_compile_error.sh"
                         } catch (e) {
-                         
+                          env.STATUS = '2'
                           env.LOCAL_ERROR = '编译错误'
                           error(env.LOCAL_ERROR)
                         }
@@ -62,8 +61,7 @@ pipeline {
                               sh "../run_testcase.sh"
                             }
                         } catch (e) {
-                            env.CC="code"
-                            sh "echo $CC"
+                            env.STATUS = '3'
                             env.LOCAL_ERROR = '运行超时(20s)'
                             error(env.LOCAL_ERROR)
                         }
