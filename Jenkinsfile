@@ -64,7 +64,7 @@ pipeline {
                             env.STATUS = '3'
                             sh "echo $STATUS"
                             env.LOCAL_ERROR = '运行超时(20s)'
-                            error(env.LOCAL_ERROR)
+                            error(env.LOCAL_ERROR,env.STATUS)
                         }
                     }
                   }
