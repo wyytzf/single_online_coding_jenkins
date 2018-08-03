@@ -52,6 +52,7 @@ pipeline {
                         } catch (e) {
                             sh "echo '运行超时'"
                             sh "echo '运行超时'" > result
+                            sh "cat result"
                         }
                     }
                   }
