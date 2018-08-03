@@ -8,9 +8,9 @@ pipeline {
         string(name: 'RUNTESTCASE_ERROR',defaultValue:'FALSE')
 
     }
-    environment {
-            STATUS = '0'
-    }
+//   environment {
+//            STATUS = '0'
+//    }
     stages {
         stage('pull image') {
             steps {
