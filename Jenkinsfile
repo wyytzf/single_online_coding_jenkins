@@ -6,9 +6,6 @@ pipeline {
         string(name: 'callback_url')
         string(name: 'image')
     }
-    environment {
-      RUNTESTCASE_ERROR='TRUE'
-    }
 
     stages {
         stage('pull image') {
@@ -58,9 +55,6 @@ pipeline {
                               sh "../run-testcase.sh"
                             }
                         } catch (e) {
-                            withEnv('RUNTESTCASE_ERROR=TRUE'){
-                                echo "RUNTESTCASE_ERROR='TRUE'"
-                            }
                             env.LOCAL_ERROR = '运行超时(20s)'
                             error(env.LOCAL_ERROR)
                         }
