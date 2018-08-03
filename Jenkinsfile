@@ -53,9 +53,7 @@ pipeline {
                             sh "echo run testcase"
                             timeout(time:20,unit:'SECONDS'){
                               sh "../run-testcase.sh"
-                            }
-                            // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
-                            // sh "../time_limit.sh run-testcase.sh"
+                            }                        
                         } catch (e) {
                             env.LOCAL_ERROR = '运行超时(20s)'
                             error(env.LOCAL_ERROR)
