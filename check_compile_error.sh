@@ -1,9 +1,10 @@
-#!/bin/sh
-echo "check compile error"
-sleep 8
-exit 1
-#MSG=$(cat compile-error)
-#echo $MSG
-#if [ -z "$MSG" ];then
-#  exit 1
-#fi
+!#/bin/sh
+MSG=$(cat compile-error)
+echo $MSG
+if [ -z "$MSG" ];then
+  #JOBS=$(jobs|grep check_compile_error.sh|awk '{print $1}')
+  #NUM=${JOBS:1:1}
+  #fg %$NUM
+  echo "编译错误"
+  exit 1
+fi
