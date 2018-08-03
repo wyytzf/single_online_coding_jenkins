@@ -6,6 +6,8 @@ pipeline {
         string(name: 'callback_url')
         string(name: 'image')
         string(name: 'RUNTESTCASE_ERROR',defaultValue:'FALSE')
+        string(name: 'status',defaultValue:'0')
+        // 0-默认值；1-编译超时；2-编译错误；3-运行超时；4-运行错误；5-成功
     }
 
     stages {
@@ -32,12 +34,14 @@ pipeline {
                             sh "../compile.sh"
                           }
                         } catch (e) {
+                            ${params.status} = '1'
                             env.LOCAL_ERROR = '编译超时(20s)'
                             error(env.LOCAL_ERROR)
                         }
                         try {
                           sh "../check_compile_error.sh"
                         } catch (e) {
+                          ${params.status} = '2'
                           env.LOCAL_ERROR = '编译错误'
                           error(env.LOCAL_ERROR)
                         }
@@ -53,9 +57,10 @@ pipeline {
                         try {
                             sh "echo run testcase"
                             timeout(time:20,unit:'SECONDS'){
-                              sh "../run-testcase.sh"
+                              sh "../run_testcase.sh"
                             }
                         } catch (e) {
+                            ${params.status} = '3'
                             env.LOCAL_ERROR = '运行超时(20s)'
                             error(env.LOCAL_ERROR)
                         }
