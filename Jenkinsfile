@@ -5,6 +5,7 @@ pipeline {
         string(name: 'user_answer_code')
         string(name: 'callback_url')
         string(name: 'image')
+        string(name: 'RUNTESTCASE_ERROR',defaultValue:'FALSE')
     }
 
     stages {
