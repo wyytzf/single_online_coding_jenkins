@@ -1,7 +1,7 @@
 !#/bin/sh
 MSG=$(cat compile-error)
 echo $MSG
-if [ -z "$MSG" ];then
+if [ -n "$MSG" ];then
   #JOBS=$(jobs|grep check_compile_error.sh|awk '{print $1}')
   #NUM=${JOBS:1:1}
   #fg %$NUM
