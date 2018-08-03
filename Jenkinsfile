@@ -34,14 +34,14 @@ pipeline {
                             sh "../compile.sh"
                           }
                         } catch (e) {
-                            ${params.status} = '1'
+                            params.status = '1'
                             env.LOCAL_ERROR = '编译超时(20s)'
                             error(env.LOCAL_ERROR)
                         }
                         try {
                           sh "../check_compile_error.sh"
                         } catch (e) {
-                          ${params.status} = '2'
+                          params.status = '2'
                           env.LOCAL_ERROR = '编译错误'
                           error(env.LOCAL_ERROR)
                         }
@@ -60,7 +60,7 @@ pipeline {
                               sh "../run_testcase.sh"
                             }
                         } catch (e) {
-                            ${params.status} = '3'
+                            params.status = '3'
                             env.LOCAL_ERROR = '运行超时(20s)'
                             error(env.LOCAL_ERROR)
                         }
