@@ -1,5 +1,5 @@
 #!/bin/sh
-job_msg=$env.LOCAL_ERROR
+job_msg="$env.LOCAL_ERROR"
 curl -X POST \
     -F "status=5" \
     -F "msg=error" \
