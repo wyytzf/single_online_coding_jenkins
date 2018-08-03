@@ -1,5 +1,5 @@
 #!/bin/sh
-job_msg=$(cat online-coding-master/result)
+job_msg=$env.LOCAL_ERROR
 curl -X POST \
     -F "status=5" \
     -F "msg=error" \

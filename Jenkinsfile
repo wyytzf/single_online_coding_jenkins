@@ -32,7 +32,8 @@ pipeline {
                           }
                           sh "../check_compile_error.sh"
                         } catch (e) {
-                          sh "echo '编译超时'" > result
+                          env.LOCAL_ERROR = '编译超时(20s)'
+                          error(env.LOCAL_ERROR)
                         }
                     }
                 }
@@ -50,10 +51,8 @@ pipeline {
                             // 运行时间检测脚本，超时则kill进程,并exit 1抛出错误
                             // sh "../time_limit.sh run-testcase.sh"
                         } catch (e) {
-                            sh "echo '运行超时'"
-                            sh "cat result"
-                            sh "echo '运行超时'" > result
-                            
+                            env.LOCAL_ERROR = '运行超时(20s)'
+                            error(env.LOCAL_ERROR)
                         }
                     }
                   }
@@ -65,12 +64,12 @@ pipeline {
         failure{
             sh "echo failure"
             sh "./failure.sh"
-            //sh "./cleanup.sh"
+            sh "./cleanup.sh"
         }
         success{
             sh "echo success"
             sh "./success.sh"
-            //sh "./cleanup.sh"
+            sh "./cleanup.sh"
         }
     }
 }
