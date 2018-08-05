@@ -17,7 +17,7 @@ for k in $( seq 1 $COUNT );
     then
         echo -e "期望\n: $EXCEPT" > result
         echo -e "实际: $ACTUAL" >> result
-        exit 1
+       # exit 1
         #let "SUCCESS_COUNT += 1"
     fi
 done
