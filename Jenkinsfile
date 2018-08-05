@@ -8,9 +8,6 @@ pipeline {
         string(name: 'RUNTESTCASE_ERROR',defaultValue:'FALSE')
 
     }
-//   environment {
-//            STATUS = '0'
-//    }
     stages {
         stage('pull image') {
             steps {
@@ -61,10 +58,10 @@ pipeline {
                               sh "../run_testcase.sh"
                             }
                         } catch (e) {
+                            sh "echo $e"
                             env.STATUS = '3'
-                            sh "echo $STATUS"
                             env.LOCAL_ERROR = '运行超时(20s)'
-                            error(env.LOCAL_ERROR,env.STATUS)
+                            error(env.LOCAL_ERROR)
                         }
                     }
                   }
