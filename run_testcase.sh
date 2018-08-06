@@ -15,8 +15,8 @@ for k in $( seq 1 $COUNT );
   #  echo "实际: $ACTUAL" >> result
     if [[ "$ACTUAL" != "$EXCEPT" ]];
     then
-        echo -e "期望\n: $EXCEPT" > result
-        echo -e "实际: $ACTUAL" >> result
+        echo -e "期望:\n $EXCEPT" > result
+        echo -e "实际:\n $ACTUAL" >> result
         exit 1
         #let "SUCCESS_COUNT += 1"
     fi

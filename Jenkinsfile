@@ -60,9 +60,8 @@ pipeline {
                         } catch (e) {
                             String err = e
                             if (err.contains("exit code 1")){
-                              sh "echo exit code 1"
                               env.STATUS = '4'
-                              env.LOCAL_ERROR = '运行错误'
+                              env.LOCAL_ERROR = '运行结果错误'
                               error(env.LOCAL_ERROR)
                             }else{
                               env.STATUS = '3'
