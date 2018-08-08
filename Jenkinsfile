@@ -14,7 +14,7 @@ pipeline {
                     dir('online-coding-master') {
                         sh "sudo chmod -R 777 ../"
                         sh "echo pull image"
-                        sh "../ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/build-image.sh"
+                        sh "../build-image.sh"
                     }
                 }
             }
@@ -28,7 +28,7 @@ pipeline {
                           sh "echo compile"
                           // 后台运行编译脚本,并设置timeout为20s
                           timeout(time:20,unit:'SECONDS'){
-                            sh "../ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/compile.sh"
+                            sh "../compile.sh"
                           }
                         } catch (e) {
                             env.STATUS = '1'
@@ -36,7 +36,7 @@ pipeline {
                             error(env.LOCAL_ERROR)
                         }
                         try {
-                          sh "../ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/check_compile_error.sh"
+                          sh "../check_compile_error.sh"
                         } catch (e) {
                           env.STATUS = '2'
                           env.LOCAL_ERROR = '编译错误'
@@ -54,7 +54,7 @@ pipeline {
                         try {
                             sh "echo run testcase"
                             timeout(time:20,unit:'SECONDS'){
-                              sh "../ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/run_testcase.sh"
+                              sh "../run_testcase.sh"
                             }
                         } catch (e) {
                             String err = e
@@ -77,13 +77,13 @@ pipeline {
     post {
         failure{
             sh "echo failure"
-            sh "./ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/failure.sh"
-            sh "./ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/cleanup.sh"
+            sh "./failure.sh"
+            sh "./cleanup.sh"
         }
         success{
             sh "echo success"
-            sh "./ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/success.sh"
-            sh "./ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/cleanup.sh"
+            sh "./success.sh"
+            sh "./cleanup.sh"
         }
     }
 }
