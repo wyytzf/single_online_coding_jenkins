@@ -6,6 +6,9 @@ pipeline {
         string(name: 'callback_url')
         string(name: 'image')
         string(name: 'language')
+        string(name: 'compile')
+        string(name: 'execute')
+        string(name: 'postfix')
     }
     stages {
         stage('pull image') {
