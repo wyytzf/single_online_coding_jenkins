@@ -31,12 +31,12 @@ pipeline {
 
                           sh "echo compile"
 
-                          if("${param.compile}"!=""){
+                          //if("${param.compile}"!=""){
                           sh "echo enter if"
                             timeout(time:20,unit:'SECONDS'){
                               sh "../compile.sh"
                             }
-                          }
+                          //}
                         } catch (e) {
                             env.STATUS = '1'
                             env.LOCAL_ERROR = '编译超时(20s)'
