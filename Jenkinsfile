@@ -30,14 +30,15 @@ pipeline {
                         try {
 
                           sh "echo compile"
-
-                          //if("${param.compile}"!=""){
+                          String compile = ${param.compile}
+                          if(compile!=""){
                           sh "echo enter if"
                             timeout(time:20,unit:'SECONDS'){
                               sh "../compile.sh"
                             }
-                          //}
+                          }
                         } catch (e) {
+                            print(e)
                             env.STATUS = '1'
                             env.LOCAL_ERROR = '编译超时(20s)'
                             error(env.LOCAL_ERROR)
