@@ -12,6 +12,7 @@ for k in $( seq 1 $COUNT );
     echo 5
     PARAM=$(cat test_data.json| jq -r ".[$idx].input")
     echo 6
+    echo "cd /var/test_directory && ${execute} demo${executePostfix} $PARAM"
     ACTUAL=$(sudo docker exec -i $language sh -c "cd /var/test_directory && ${execute} demo${executePostfix} $PARAM")
     echo 7
     EXCEPT=$(cat test_data.json| jq -r ".[$idx].expectedOutput")
