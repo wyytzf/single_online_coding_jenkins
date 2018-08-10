@@ -66,6 +66,7 @@ pipeline {
                             }
                         } catch (e) {
                             String err = e
+                            println err
                             if (err.contains("exit code 1")){
                               env.STATUS = '4'
                               env.LOCAL_ERROR = '运行结果错误'
