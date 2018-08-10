@@ -8,7 +8,8 @@ pipeline {
         string(name: 'language')
         string(name: 'compile')
         string(name: 'execute')
-        string(name: 'postfix')
+        string(name: 'sourcePostfix')
+        string(name: 'executePostfix')
     }
     stages {
         stage('pull image') {
@@ -17,7 +18,7 @@ pipeline {
                     dir('online-coding-master') {
                         sh "sudo chmod -R 777 ../"
                         sh "echo pull image"
-                        sh "../build-image.sh"
+                        sh "../ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/build-image.sh"
                     }
                 }
             }
@@ -29,9 +30,11 @@ pipeline {
                         try {
 
                           sh "echo compile"
-                          // 后台运行编译脚本,并设置timeout为20s
-                          timeout(time:20,unit:'SECONDS'){
-                            sh "../compile.sh"
+
+                          if("${param.compile}"!=""){
+                            timeout(time:20,unit:'SECONDS'){
+                              sh "../ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/compile.sh"
+                            }
                           }
                         } catch (e) {
                             env.STATUS = '1'
@@ -39,7 +42,7 @@ pipeline {
                             error(env.LOCAL_ERROR)
                         }
                         try {
-                          sh "../check_compile_error.sh"
+                          sh "../ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/check_compile_error.sh"
                         } catch (e) {
                           env.STATUS = '2'
                           env.LOCAL_ERROR = '编译错误'
@@ -57,7 +60,7 @@ pipeline {
                         try {
                             sh "echo run testcase"
                             timeout(time:20,unit:'SECONDS'){
-                              sh "../run_testcase.sh"
+                              sh "../ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/run_testcase.sh"
                             }
                         } catch (e) {
                             String err = e
@@ -80,13 +83,13 @@ pipeline {
     post {
         failure{
             sh "echo failure"
-            sh "./failure.sh"
-            sh "./cleanup.sh"
+            sh "./ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/failure.sh"
+            sh "./ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/cleanup.sh"
         }
         success{
             sh "echo success"
-            sh "./success.sh"
-            sh "./cleanup.sh"
+            sh "./ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/success.sh"
+            sh "./ADD-SINGLE-LANGUAGE-ONLINE-CODING-SUBMISSION/cleanup.sh"
         }
     }
 }
