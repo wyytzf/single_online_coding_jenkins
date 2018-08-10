@@ -30,7 +30,7 @@ pipeline {
                         try {
 
                           sh "echo compile"
-                          String compile = ${param.compile}
+                          String compile = ${params.compile}
                           if(compile!=""){
                           sh "echo enter if"
                             timeout(time:20,unit:'SECONDS'){
