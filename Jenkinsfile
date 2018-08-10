@@ -32,6 +32,7 @@ pipeline {
                           sh "echo compile"
 
                           if("${param.compile}"!=""){
+                          sh "echo enter if"
                             timeout(time:20,unit:'SECONDS'){
                               sh "../compile.sh"
                             }
