@@ -6,7 +6,6 @@ COUNT=$(cat test_data.json| jq -r ". | length")
 STARTTIME=`date +%s%N`
 echo 2
 for k in $( seq 1 $COUNT );
-  echo 3
   do
     echo 4
     idx=`expr $k - 1`
