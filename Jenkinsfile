@@ -27,19 +27,16 @@ pipeline {
             steps {
                 script {
                     dir('online-coding-master') {
-                        try {
-
-                          sh "echo compile"
-                          String compile = "${params.compile}"
-                          println "******"
-                          println compile
-                          println "******"
+                        String compile = "${params.compile}"
                           if(compile!=""){
+                        try {
+                          sh "echo compile"
+                          
                           sh "echo enter if"                  
                             timeout(time:20,unit:'SECONDS'){
                               sh "../compile.sh"
                             }
-                          }
+                          
                         } catch (e) {
                             print(e)
                             env.STATUS = '1'
@@ -53,7 +50,7 @@ pipeline {
                           env.LOCAL_ERROR = '编译错误'
                           error(env.LOCAL_ERROR)
                         }
-
+                        }
                     }
                 }
             }
