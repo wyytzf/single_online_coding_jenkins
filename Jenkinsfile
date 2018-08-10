@@ -31,8 +31,11 @@ pipeline {
 
                           sh "echo compile"
                           String compile = "${params.compile}"
+                          println "******"
+                          println compile
+                          println "******"
                           if(compile!=""){
-                          sh "echo enter if"
+                          sh "echo enter if"                  
                             timeout(time:20,unit:'SECONDS'){
                               sh "../compile.sh"
                             }
