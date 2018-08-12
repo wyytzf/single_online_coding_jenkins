@@ -87,12 +87,12 @@ pipeline {
         failure{
             sh "echo failure"
             sh "./failure.sh"
-            //sh "./cleanup.sh"
+            sh "./cleanup.sh"
         }
         success{
             sh "echo success"
             sh "./success.sh"
-            //sh "./cleanup.sh"
+            sh "./cleanup.sh"
         }
     }
 }
